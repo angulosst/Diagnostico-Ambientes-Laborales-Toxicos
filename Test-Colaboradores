@@ -1,0 +1,1268 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnóstico: ¿Estás en un Ambiente Laboral Tóxico?</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .expert-info {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            border-left: 4px solid #f39c12;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border-left: 3px solid #e74c3c;
+        }
+
+        .question-text {
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .radio-option:hover {
+            background: #ecf0f1;
+        }
+
+        input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .results {
+            display: none;
+            margin-top: 30px;
+            padding: 30px;
+            border-radius: 15px;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .results.low-risk {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+        }
+
+        .results.medium-risk {
+            background: linear-gradient(135deg, #f39c12, #d35400);
+            color: white;
+        }
+
+        .results.high-risk {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+        }
+
+        .results.critical-risk {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            color: white;
+        }
+
+        .plan-section {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .plan-step {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            border-left: 4px solid rgba(255,255,255,0.3);
+        }
+
+        .plan-step h4 {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .plan-step ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .plan-step li {
+            margin-bottom: 5px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .user-info {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .download-section {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #ecf0f1;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .emergency-contact {
+            background: rgba(255,255,255,0.15);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #fff;
+        }
+
+        .success-message {
+            background: #2ecc71;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚨 Diagnóstico: ¿Estás en un Ambiente Laboral Tóxico?</h1>
+            <div class="expert-info">
+                <p><strong>👩‍💼 Nhora Angulo</strong></p>
+                <p>Experta en Liderazgo y Seguridad y Salud en el Trabajo (SST)</p>
+                <p>Kit para Líderes</p>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Formulario inicial -->
+            <div id="userForm" class="user-info">
+                <h3>Información Personal</h3>
+                <div class="input-group">
+                    <label for="userName">Nombre completo:</label>
+                    <input type="text" id="userName" placeholder="Ingresa tu nombre completo" required>
+                </div>
+                <div class="input-group">
+                    <label for="userEmail">Correo electrónico:</label>
+                    <input type="email" id="userEmail" placeholder="tu@email.com" required>
+                </div>
+                <div class="input-group">
+                    <label for="userCompany">Empresa (opcional):</label>
+                    <input type="text" id="userCompany" placeholder="Nombre de tu empresa">
+                </div>
+                <button class="btn" onclick="startDiagnosis()">Iniciar Diagnóstico</button>
+            </div>
+
+            <!-- Barra de progreso -->
+            <div id="progressSection" class="hidden">
+                <div class="progress-bar">
+                    <div class="progress" id="progressBar"></div>
+                </div>
+                <p id="progressText">Pregunta 1 de 25</p>
+            </div>
+
+            <!-- Encuesta -->
+            <div id="surveyForm" class="hidden">
+                <form id="toxicWorkplaceForm">
+                    <div class="section">
+                        <div class="section-title">📢 Comunicación y Respeto</div>
+                        <div class="question">
+                            <div class="question-text">1. ¿Tu jefe o supervisor te grita, te humilla o te habla de manera irrespetuosa frecuentemente?</div>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q1" value="si"> Sí
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q1" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">2. ¿Recibes críticas destructivas sin orientación sobre cómo mejorar?</div>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q2" value="si"> Sí
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q2" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">3. ¿Te ignoran deliberadamente en reuniones o cuando haces preguntas importantes?</div>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q3" value="si"> Sí
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q3" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">4. ¿Sientes que no puedes expresar tus ideas u opiniones sin temor a represalias?</div>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q4" value="si"> Sí
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q4" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">5. ¿Has sido víctima de comentarios despectivos sobre tu apariencia, origen, género o capacidades?</div>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q5" value="si"> Sí
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q5" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">⚖️ Carga Laboral y Expectativas</div>
+                        <div class="question">
+                            <div class="question-text">6. ¿Te asignan constantemente tareas con plazos imposibles de cumplir?</div>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q6" value="si"> Sí
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q6" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">7. ¿Se espera que trabajes fuera de tu horario laboral de forma habitual y sin compensación?</div>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q7" value="si"> Sí
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q7" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">8. ¿Cambian tus responsabilidades constantemente sin explicación clara?</div>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q8" value="si"> Sí
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q8" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">9. ¿Te asignan tareas que están muy por debajo o muy por encima de tu nivel de competencia deliberadamente?</div>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q9" value="si"> Sí
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q9" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">10. ¿Sientes que nunca puedes hacer nada bien, sin importar tu esfuerzo?</div>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q10" value="si"> Sí
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q10" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">🤝 Ambiente de Trabajo y Relaciones</div>
+                        <div class="question">
+                            <div class="question-text">11. ¿Existe favoritismo evidente hacia ciertos empleados?</div>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q11" value="si"> Sí
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q11" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">12. ¿Te excluyen de reuniones, eventos o información importante para tu trabajo?</div>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q12" value="si"> Sí
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q12" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">13. ¿Hay chismes, rumores o comentarios maliciosos sobre ti en el trabajo?</div>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q13" value="si"> Sí
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q13" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">14. ¿Sientes que tus compañeros compiten de manera desleal o sabotean tu trabajo?</div>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q14" value="si"> Sí
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q14" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">15. ¿El ambiente de trabajo es tenso y estresante la mayor parte del tiempo?</div>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q15" value="si"> Sí
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q15" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">🏆 Reconocimiento y Desarrollo</div>
+                        <div class="question">
+                            <div class="question-text">16. ¿Rara vez o nunca recibes reconocimiento por tu buen trabajo?</div>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q16" value="si"> Sí
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q16" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">17. ¿Te han negado oportunidades de capacitación o desarrollo profesional sin justificación?</div>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q17" value="si"> Sí
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q17" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">18. ¿Otros se llevan el crédito por tu trabajo?</div>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q18" value="si"> Sí
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q18" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">19. ¿Sientes que no tienes oportunidades de crecimiento en tu posición actual?</div>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q19" value="si"> Sí
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q19" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">20. ¿Te han pasado por alto para promociones de manera injusta?</div>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q20" value="si"> Sí
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q20" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">🧠 Impacto en tu Bienestar</div>
+                        <div class="question">
+                            <div class="question-text">21. ¿Sientes ansiedad, estrés o malestar físico cuando piensas en ir al trabajo?</div>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q21" value="si"> Sí
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q21" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">22. ¿Has notado cambios en tu sueño, apetito o estado de ánimo relacionados con el trabajo?</div>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q22" value="si"> Sí
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q22" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">23. ¿Evitas interactuar con tu jefe o ciertos compañeros?</div>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q23" value="si"> Sí
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q23" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">24. ¿Tu autoestima ha disminuido desde que trabajas en este lugar?</div>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q24" value="si"> Sí
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q24" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">25. ¿Has considerado renunciar principalmente por el ambiente laboral?</div>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q25" value="si"> Sí
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q25" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn" onclick="calculateResults()">Ver Resultados del Diagnóstico</button>
+                </form>
+            </div>
+
+            <!-- Resultados -->
+            <div id="results" class="results"></div>
+        </div>
+    </div>
+
+    <script>
+        let userName = '';
+        let userEmail = '';
+        let userCompany = '';
+
+        function startDiagnosis() {
+            userName = document.getElementById('userName').value.trim();
+            userEmail = document.getElementById('userEmail').value.trim();
+            userCompany = document.getElementById('userCompany').value.trim();
+
+            if (!userName || !userEmail) {
+                alert('Por favor, completa tu nombre y correo electrónico.');
+                return;
+            }
+
+            document.getElementById('userForm').classList.add('hidden');
+            document.getElementById('progressSection').classList.remove('hidden');
+            document.getElementById('surveyForm').classList.remove('hidden');
+            
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const questions = document.querySelectorAll('input[type="radio"]:checked');
+            const totalQuestions = 25;
+            const progress = (questions.length / totalQuestions) * 100;
+            
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `Pregunta ${questions.length} de ${totalQuestions}`;
+        }
+
+        // Actualizar progreso cuando se selecciona una respuesta
+        document.addEventListener('change', function(e) {
+            if (e.target.type === 'radio') {
+                updateProgress();
+            }
+        });
+
+        function calculateResults() {
+            const form = document.getElementById('toxicWorkplaceForm');
+            const formData = new FormData(form);
+            
+            let yesCount = 0;
+            let totalQuestions = 25;
+            let answeredQuestions = 0;
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                const answer = formData.get(`q${i}`);
+                if (answer) {
+                    answeredQuestions++;
+                    if (answer === 'si') {
+                        yesCount++;
+                    }
+                }
+            }
+
+            if (answeredQuestions < totalQuestions) {
+                alert(`Por favor, responde todas las preguntas. Te faltan ${totalQuestions - answeredQuestions} preguntas por responder.`);
+                return;
+            }
+
+            showResults(yesCount, userName, userEmail, userCompany);
+        }
+
+        function showResults(yesCount, name, email, company) {
+            const resultsDiv = document.getElementById('results');
+            let riskLevel, riskClass, title, description, actionPlan;
+
+            if (yesCount <= 5) {
+                riskLevel = 'Ambiente Laboral Saludable';
+                riskClass = 'low-risk';
+                title = '🟢 EXCELENTE NOTICIA';
+                description = `${name}, tu ambiente laboral parece ser mayormente positivo y saludable. Esto es fundamental para tu bienestar y desarrollo profesional.`;
+                actionPlan = getHealthyWorkplaceActionPlan();
+            } else if (yesCount <= 12) {
+                riskLevel = 'Señales de Alerta';
+                riskClass = 'medium-risk';
+                title = '🟡 ATENCIÓN NECESARIA';
+                description = `${name}, hay aspectos preocupantes en tu ambiente laboral que requieren atención inmediata para prevenir que la situación empeore.`;
+                actionPlan = getWarningSignsActionPlan();
+            } else if (yesCount <= 18) {
+                riskLevel = 'Ambiente Laboral Tóxico';
+                riskClass = 'high-risk';
+                title = '🔴 SITUACIÓN CRÍTICA';
+                description = `${name}, estás en un ambiente laboral claramente tóxico que está afectando tu bienestar. Es urgente que tomes medidas para protegerte.`;
+                actionPlan = getToxicWorkplaceActionPlan();
+            } else {
+                riskLevel = 'Ambiente Laboral Altamente Tóxico';
+                riskClass = 'critical-risk';
+                title = '🚨 EMERGENCIA LABORAL';
+                description = `${name}, estás en una situación de alto riesgo que pone en peligro tu salud mental y física. Necesitas actuar inmediatamente.`;
+                actionPlan = getCriticalSituationActionPlan();
+            }
+
+            resultsDiv.className = `results ${riskClass}`;
+            resultsDiv.innerHTML = `
+                <h2>${title}</h2>
+                <h3>Resultado: ${riskLevel}</h3>
+                <p><strong>Puntuación:</strong> ${yesCount} de 25 respuestas "Sí"</p>
+                <p>${description}</p>
+                
+                <div class="plan-section">
+                    <h3>📋 TU PLAN DE ACCIÓN PERSONALIZADO</h3>
+                    ${actionPlan}
+                </div>
+
+                <div class="download-section">
+                    <h3>💾 Descargar Tu Informe</h3>
+                    <p>Descarga tu diagnóstico y plan de acción personalizado para tenerlo siempre disponible.</p>
+                    <button class="btn" onclick="downloadReport('${name}', '${email}', '${company}', '${riskLevel}', ${yesCount})">
+                        📄 Descargar Informe en TXT
+                    </button>
+                    <div id="downloadSuccess" class="success-message">
+                        ✅ Tu informe se ha descargado exitosamente.
+                    </div>
+                </div>
+
+                <div class="expert-info" style="margin-top: 20px;">
+                    
+                    <p>⚖️ DESCARGO DE RESPONSABILIDAD</strong></p>
+		<p>Este diagnóstico es una herramienta educativa. Para las situaciones médicas o legales
+específicas, consulte con profesionales especializados. La información proporcionada
+no constituye asesoramiento médico o legal profesional.</p>
+                    <p><strong>Transformando Líderes</strong> - Transformando desafíos laborales en oportunidades de crecimiento</p>
+<p><strong>👩‍💼 Nhora Angulo - Experta en Liderazgo y SST</strong></p>
+                    
+                    <div style="margin-top: 15px; padding: 15px; background: rgba(255,255,255,0.15); border-radius: 8px;">
+                        <h4>🔧 HERRAMIENTAS RÁPIDAS:</h4>
+                        <p><strong>📱 Apps útiles:</strong> Notas del celular, Google Drive, Calm, Headspace</p>
+                        <p><strong>⏰ Técnicas express:</strong> Respiración 4-7-8 (2 min), 5 respiraciones antes de reuniones</p>
+                        <p><strong>🗣️ Frase clave:</strong> "¿Cómo podríamos abordar esto juntos?"</p>
+                        
+                        <div style="margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 5px;">
+                            <p><strong>💡 RECUERDA:</strong></p>
+                            <p>✅ No es tu culpa estar en esta situación</p>
+                            <p>✅ Sí puedes cambiar tu situación</p>
+                            <p>✅ Mereces un ambiente laboral respetuoso</p>
+                            <p>✅ Tienes herramientas para mejorar tu situación</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            resultsDiv.style.display = 'block';
+            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function getHealthyWorkplaceActionPlan() {
+            return `
+                <div class="plan-step">
+                    <h4>📝 DOCUMENTA (5 min/día):</h4>
+                    <ul>
+                        <li>✅ 1 logro diario en una nota del celular</li>
+                        <li>✅ Ideas de mejora que propones</li>
+                        <li>✅ Feedback positivo recibido</li>
+                    </ul>
+                </div>
+
+                <div class="plan-step">
+                    <h4>💬 COMUNICA:</h4>
+                    <ul>
+                        <li>✅ Da 1 reconocimiento específico diario a un compañero</li>
+                        <li>✅ Pregunta semanalmente: "¿Cómo puedo apoyarte mejor?"</li>
+                        <li>✅ Propón 1 mejora pequeña cada semana</li>
+                    </ul>
+                </div>
+
+                <div class="plan-step">
+                    <h4>🧠 CUIDA TU BIENESTAR:</h4>
+                    <ul>
+                        <li>✅ 5 min de respiración profunda al iniciar el día</li>
+                        <li>✅ 3 cosas por las que estás agradecido antes de salir del trabajo</li>
+                        <li>✅ Pausa de 2 min entre reuniones para resetear energía</li>
+                    </ul>
+                </div>
+
+                <div class="plan-step">
+                    <h4>🎯 ACCIÓN INMEDIATA:</h4>
+                    <p><strong>Hoy mismo:</strong> Agradece o felicita a alguien por algo específico que hizo bien.</p>
+                </div>
+            `;
+        }
+
+        function getWarningSignsActionPlan() {
+            return `
+                <div class="plan-step">
+                    <h4>📝 DOCUMENTA (10 min/día):</h4>
+                    <ul>
+                        <li>✅ App de notas: fecha, situación, cómo te afectó, qué funcionó para mejorarlo</li>
+                        <li>✅ Screenshots de emails importantes</li>
+                        <li>✅ Lista de testigos positivos en cada situación</li>
+                    </ul>
+                </div>
+
+                <div class="plan-step">
+                    <h4>💬 COMUNICA CON ESTRATEGIA:</h4>
+                    <ul>
+                        <li>✅ Prepara 3 puntos clave antes de hablar con tu jefe</li>
+                        <li>✅ Usa esta frase: "He notado [situación]. Propongo [solución] porque [beneficio]"</li>
+                        <li>✅ Confirma acuerdos por escrito: "Entendí que acordamos..."</li>
+                    </ul>
+                </div>
+
+                <div class="plan-step">
+                    <h4>🧠 PROTEGE TU BIENESTAR:</h4>
+                    <ul>
+                        <li>✅ Técnica 4-7-8: inhala 4, retén 7, exhala 8 cuando sientes estrés</li>
+                        <li>✅ Límites claros: "Para dar mi mejor rendimiento, necesito..."</li>
+                        <li>✅ Red de apoyo: habla con 1 persona de confianza cada semana</li>
+                    </ul>
+                </div>
+
+                <div class="plan-step">
+                    <h4>🎯 PLAN DE 30 DÍAS:</h4>
+                    <ul>
+                        <li><strong>Días 1-7:</strong> Documenta todo</li>
+                        <li><strong>Días 8-14:</strong> Habla con tu supervisor o jefe</li>
+                        <li><strong>Días 15-21:</strong> Implementa límites saludables</li>
+                        <li><strong>Días 22-30:</strong> Si no mejora, habla con RRHH con propuestas de solución</li>
+                    </ul>
+                </div>
+
+                <div class="plan-step">
+                    <h4>🎯 ACCIÓN INMEDIATA:</h4>
+                    <p><strong>Hoy mismo:</strong> Inicia tu archivo de documentación y agenda reunión con tu jefe.</p>
+                </div>
+            `;
+        }
+
+        function getToxicWorkplaceActionPlan() {
+            return `
+                <div class="emergency-contact">
+                    <p><strong>🚨 TU PLAN: PROTÉGETE Y ACTÚA</strong></p>
+                </div>
+
+                <div class="plan-step">
+                    <h4>📝 DOCUMENTA ESTRATÉGICAMENTE:</h4>
+                    <ul>
+                        <li>✅ EVIDENCIA: fotos, emails, testigos, fechas exactas</li>
+                        <li>✅ IMPACTO: cómo afecta tu trabajo y productividad</li>
+                        <li>✅ SOLUCIONES: qué propones para mejorar la situación</li>
+                    </ul>
+                </div>
+
+                <div class="plan-step">
+                    <h4>💬 COMUNICA CON PROTECCIÓN:</h4>
+                    <ul>
+                        <li>✅ Solo por escrito para temas importantes</li>
+                        <li>✅ Copia a alguien más en emails sensibles</li>
+                        <li>✅ Frase clave: "Por mi bienestar y productividad, solicito..."</li>
+                    </ul>
+                </div>
+
+                <div class="plan-step">
+                    <h4>🧠 AUTOCUIDADO INTENSIVO:</h4>
+                    <ul>
+                        <li>✅ URGENTE: Ve al médico si tienes síntomas físicos</li>
+                        <li>✅ Técnica SOS: Para, Respira, Piensa, Actúa</li>
+                        <li>✅ Habla con familia/amigos - no estás solo</li>
+                    </ul>
+                </div>
+
+                <div class="plan-step">
+                    <h4>🎯 PLAN DE EMERGENCIA (15 DÍAS):</h4>
+                    <ul>
+                        <li><strong>Días 1-3:</strong> Protege tu salud, documenta todo</li>
+                        <li><strong>Días 4-7:</strong> Presenta propuestas de mejora a RRHH</li>
+                        <li><strong>Días 8-11:</strong> Solicita cambio de área/supervisor</li>
+                        <li><strong>Días 12-15:</strong> Si no hay cambios, activa plan de salida</li>
+                    </ul>
+                </div>
+
+                <div class="plan-step">
+                    <h4>📞 RECURSOS INMEDIATOS:</h4>
+                    <ul>
+                        <li>Línea de crisis: 192 opcion 4 linea nacional apoyo emocional o psicologico </li>
+                        <li>Médico/psicólogo: agenda HOY o tan pronto como puedas</li>
+   
+                    </ul>
+                </div>
+
+                <div class="plan-step">
+                    <h4>🎯 ACCIÓN INMEDIATA:</h4>
+                    <p><strong>Hoy mismo:</strong> Ve al médico y habla con alguien de confianza.</p>
+                </div>
+            `;
+        }
+
+        function getCriticalSituationActionPlan() {
+            return `
+                <div class="emergency-contact">
+                    <p><strong>🚨 CRISIS LABORAL:</strong> Tu salud está en peligro inmediato. Líneas de emergencia: 192 (crisis), 911 (emergencia), 155 (violencia)</p>
+                    <p><strong>⚠️ ESTO ES UNA EMERGENCIA - ACTÚA HOY</strong></p>
+                </div>
+
+                <div class="plan-step">
+                    <h4>🏥 SALVA TU SALUD (HOY):</h4>
+                    <ul>
+                        <li>✅ Ve al médico YA - no esperes</li>
+                        <li>✅ Pide incapacidad a tu médico si es necesario</li>
+                        <li>✅ Si piensas en hacerte daño: ve a urgencias o llama 192</li>
+                    </ul>
+                </div>
+
+                <div class="plan-step">
+                    <h4>📝 DOCUMENTA PARA PROTEGERTE:</h4>
+                    <ul>
+                        <li>✅ TODO por escrito: síntomas, incidentes, impacto</li>
+                        <li>✅ Copia de tu expediente laboral</li>
+                        <li>✅ Evidencia de abuso o negligencia</li>
+                    </ul>
+                </div>
+
+                <div class="plan-step">
+                    <h4>💬 COMUNICACIÓN DE SUPERVIVENCIA:</h4>
+                    <ul>
+                        <li>✅ Informa a tu familia la gravedad de la situación</li>
+                        <li>✅ Comunica solo lo mínimo necesario en el trabajo</li>
+                        <li>✅ Busca apoyo legal: muchos abogados dan consulta gratuita</li>
+                    </ul>
+                </div>
+
+                <div class="plan-step">
+                    <h4>🛡️ PLAN DE ESCAPE (7 DÍAS):</h4>
+                    <ul>
+                        <li><strong>HOY:</strong> Médico + avisar familia</li>
+                        <li><strong>Día 2-3:</strong> Asesoría  + documentar todo</li>
+                        <li><strong>Día 4-5:</strong> Solicitar trabajo remoto o incapacidad</li>
+                        <li><strong>Día 6-7:</strong> Plan de salida</li>
+                    </ul>
+                </div>
+
+                <div class="plan-step">
+                    <h4>📞 NÚMEROS DE EMERGENCIA:</h4>
+                    <ul>
+                        <li><strong>Crisis:</strong> 192</li>
+                        <li><strong>Emergencia:</strong> 911</li>
+                        <li><strong>Violencia:</strong> 155</li>
+                    </ul>
+                </div>
+
+                <div class="plan-step">
+                    <h4>💪 MANTRAS DE SUPERVIVENCIA:</h4>
+                    <ul>
+                        <li>"Esto es temporal"</li>
+                        <li>"Merezco respeto"</li>
+                        <li>"Soy más fuerte de lo que creo"</li>
+                        <li>"Voy a salir de esto"</li>
+                    </ul>
+                </div>
+
+                <div class="plan-step">
+                    <h4>🎯 ACCIÓN INMEDIATA:</h4>
+                    <p><strong>AHORA MISMO:</strong> Llama y agenda cita médica. Texto a 3 personas de confianza: "Necesito ayuda urgente con mi situación laboral."</p>
+                </div>
+            `;
+        }
+
+        function downloadReport(name, email, company, riskLevel, score) {
+            const currentDate = new Date().toLocaleDateString('es-ES');
+            
+            // Generar contenido del informe
+            const reportContent = generateReportContent(name, email, company, riskLevel, score, currentDate);
+            
+            // Crear el archivo de texto
+            const blob = new Blob([reportContent], { type: 'text/plain;charset=utf-8' });
+            const url = window.URL.createObjectURL(blob);
+            
+            // Crear enlace de descarga
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Diagnostico_Ambiente_Laboral_${name.replace(/\s+/g, '_')}_${currentDate.replace(/\//g, '-')}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            // Mostrar mensaje de éxito
+            document.getElementById('downloadSuccess').style.display = 'block';
+            
+            console.log('Informe descargado exitosamente');
+        }
+
+        function generateReportContent(name, email, company, riskLevel, score, date) {
+            const actionPlan = getActionPlanText(score);
+            
+            return `
+═══════════════════════════════════════════════════════════════════════════════
+🚨 DIAGNÓSTICO DE AMBIENTE LABORAL - INFORME PERSONALIZADO
+═══════════════════════════════════════════════════════════════════════════════
+
+👩‍💼 DISEÑADO POR: Nhora Angulo
+📋 PROGRAMA: Kit para Líderes - Experta en Liderazgo y SST
+📅 FECHA: ${date}
+
+═══════════════════════════════════════════════════════════════════════════════
+📊 INFORMACIÓN PERSONAL
+═══════════════════════════════════════════════════════════════════════════════
+
+👤 Nombre: ${name}
+📧 Email: ${email}
+🏢 Empresa: ${company || 'No especificada'}
+
+═══════════════════════════════════════════════════════════════════════════════
+📈 RESULTADOS DEL DIAGNÓSTICO
+═══════════════════════════════════════════════════════════════════════════════
+
+🎯 NIVEL DE RIESGO: ${riskLevel}
+📊 PUNTUACIÓN: ${score} de 25 respuestas "Sí"
+
+${getResultDescription(score, name)}
+
+═══════════════════════════════════════════════════════════════════════════════
+📋 TU PLAN DE ACCIÓN PERSONALIZADO
+═══════════════════════════════════════════════════════════════════════════════
+
+${actionPlan}
+
+═══════════════════════════════════════════════════════════════════════════════
+🔧 HERRAMIENTAS RÁPIDAS
+═══════════════════════════════════════════════════════════════════════════════
+
+📱 APPS ÚTILES:
+• Documentación: Notas del celular, Google Drive
+• Bienestar: Calm, Headspace, Insight Timer
+• Comunicación: Gmail, WhatsApp para confirmaciones
+
+⏰ TÉCNICAS EXPRESS:
+• Estrés agudo: Respiración 4-7-8 (2 minutos)
+• Antes de reunión difícil: 5 respiraciones profundas
+• Final del día: 3 cosas buenas que pasaron
+
+🗣️ FRASES QUE FUNCIONAN:
+• "¿Cómo podríamos abordar esto juntos?"
+• "Para ser más productivo, necesito..."
+• "He notado [X], propongo [Y] porque [Z]"
+• "¿Podrías confirmarme por escrito que...?"
+
+🚩 SEÑALES DE QUE NECESITAS AYUDA PROFESIONAL:
+• No puedes dormir por pensar en el trabajo
+• Síntomas físicos sin explicación médica
+• Pensamientos de hacerte daño
+• Ataques de pánico frecuentes
+
+═══════════════════════════════════════════════════════════════════════════════
+📞 RECURSOS DE APOYO
+═══════════════════════════════════════════════════════════════════════════════
+
+🆘 LÍNEAS DE EMERGENCIA:
+• Crisis: 192
+• Emergencia: 911
+• Violencia: 155
+
+🏥 PROFESIONALES:
+• Médico/psicólogo: agenda cita si presentas síntomas
+• Abogado laboral: consulta gratuita disponible
+• Ministerio de Trabajo: para denuncias formales
+
+═══════════════════════════════════════════════════════════════════════════════
+💡 RECUERDA SIEMPRE
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ NO es tu culpa estar en esta situación
+✅ SÍ puedes cambiar tu situación
+✅ MERECES un ambiente laboral respetuoso
+✅ TIENES herramientas para mejorar tu situación
+
+═══════════════════════════════════════════════════════════════════════════════
+👩‍💼 INFORMACIÓN PROFESIONAL
+═══════════════════════════════════════════════════════════════════════════════
+
+Este diagnóstico ha sido elaborado por:
+NHORA ANGULO
+Experta en Liderazgo y Seguridad y Salud en el Trabajo (SST)
+
+📋 PROGRAMA: Kit para Líderes
+🎯 MISIÓN: Transformando desafíos laborales en oportunidades de crecimiento
+
+Si necesitas asesoría personalizada o capacitación para tu empresa, contáctame.
+
+═══════════════════════════════════════════════════════════════════════════════
+⚖️ DESCARGO DE RESPONSABILIDAD
+═══════════════════════════════════════════════════════════════════════════════
+
+Este diagnóstico es una herramienta educativa. Para situaciones médicas o legales
+específicas, consulte con profesionales especializados. La información proporcionada
+no constituye asesoramiento médico o legal profesional.
+
+═══════════════════════════════════════════════════════════════════════════════
+📅 Fin del Informe - Generado el ${date}
+═══════════════════════════════════════════════════════════════════════════════
+            `.trim();
+        }
+
+        function getResultDescription(score, name) {
+            if (score <= 5) {
+                return `🟢 EXCELENTE NOTICIA
+${name}, tu ambiente laboral parece ser mayormente positivo y saludable. 
+Esto es fundamental para tu bienestar y desarrollo profesional.`;
+            } else if (score <= 12) {
+                return `🟡 ATENCIÓN NECESARIA
+${name}, hay aspectos preocupantes en tu ambiente laboral que requieren 
+atención inmediata para prevenir que la situación empeore.`;
+            } else if (score <= 18) {
+                return `🔴 SITUACIÓN CRÍTICA
+${name}, estás en un ambiente laboral claramente tóxico que está afectando 
+tu bienestar. Es urgente que tomes medidas para protegerte.`;
+            } else {
+                return `🚨 EMERGENCIA LABORAL
+${name}, estás en una situación de alto riesgo que pone en peligro tu salud 
+mental y física. Necesitas actuar inmediatamente.`;
+            }
+        }
+
+        function getActionPlanText(score) {
+            if (score <= 5) {
+                return `🟢 AMBIENTE SALUDABLE - TU PLAN: MAXIMIZA TU IMPACTO
+
+📝 DOCUMENTA (5 min/día):
+✅ 1 logro diario en una nota del celular
+✅ Ideas de mejora que propones
+✅ Feedback positivo recibido
+
+💬 COMUNICA:
+✅ Da 1 reconocimiento específico diario a un compañero
+✅ Pregunta semanalmente: "¿Cómo puedo apoyarte mejor?"
+✅ Propón 1 mejora pequeña cada semana
+
+🧠 CUIDA TU BIENESTAR:
+✅ 5 min de respiración profunda al iniciar el día
+✅ 3 cosas por las que estás agradecido antes de salir del trabajo
+✅ Pausa de 2 min entre reuniones para resetear energía
+
+🎯 ACCIÓN INMEDIATA:
+Hoy mismo: Agradece a alguien por algo específico que hizo bien.`;
+            } else if (score <= 12) {
+                return `🟡 SEÑALES DE ALERTA - TU PLAN: ACTÚA CON INTELIGENCIA
+
+📝 DOCUMENTA (10 min/día):
+✅ App de notas: fecha, situación, cómo te afectó, qué funcionó para mejorarlo
+✅ Screenshots de emails importantes
+✅ Lista de testigos positivos en cada situación
+
+💬 COMUNICA CON ESTRATEGIA:
+✅ Prepara 3 puntos clave antes de hablar con tu jefe
+✅ Usa esta frase: "He notado [situación]. Propongo [solución] porque [beneficio]"
+✅ Confirma acuerdos por escrito: "Entendí que acordamos..."
+
+🧠 PROTEGE TU BIENESTAR:
+✅ Técnica 4-7-8: inhala 4, retén 7, exhala 8 cuando sientes estrés
+✅ Límites claros: "Para dar mi mejor rendimiento, necesito..."
+✅ Red de apoyo: habla con 1 persona de confianza cada semana
+
+🎯 PLAN DE 30 DÍAS:
+• Días 1-7: Documenta todo
+• Días 8-14: Habla con tu supervisor o jefe
+• Días 15-21: Implementa límites saludables
+• Días 22-30: Si no mejora, habla con RRHH con propuestas de solución
+
+🎯 ACCIÓN INMEDIATA:
+Hoy mismo: Inicia tu archivo de documentación y agenda reunión con tu jefe.`;
+            } else if (score <= 18) {
+                return `🔴 AMBIENTE TÓXICO - TU PLAN: PROTÉGETE Y ACTÚA
+
+📝 DOCUMENTA ESTRATÉGICAMENTE:
+✅ EVIDENCIA: fotos, emails, testigos, fechas exactas
+✅ IMPACTO: cómo afecta tu trabajo y productividad
+✅ SOLUCIONES: qué propones para mejorar la situación
+
+💬 COMUNICA CON PROTECCIÓN:
+✅ Solo por escrito para temas importantes
+✅ Copia a alguien más en emails sensibles
+✅ Frase clave: "Por mi bienestar y productividad, solicito..."
+
+🧠 AUTOCUIDADO INTENSIVO:
+✅ URGENTE: Ve al médico si tienes síntomas físicos
+✅ Técnica SOS: Para, Respira, Piensa, Actúa
+✅ Habla con familia/amigos - no estás solo
+
+🎯 PLAN DE EMERGENCIA (15 DÍAS):
+• Días 1-3: Protege tu salud, documenta todo
+• Días 4-7: Presenta propuestas de mejora a RRHH
+• Días 8-11: Solicita cambio de área/supervisor
+• Días 12-15: Si no hay cambios, activa plan de salida
+
+📞 RECURSOS INMEDIATOS:
+• Línea de crisis: 192
+• Médico/psicólogo: agenda HOY
+• Abogado laboral: consulta gratuita
+
+🎯 ACCIÓN INMEDIATA:
+Hoy mismo: Ve al médico y habla con alguien de confianza.`;
+            } else {
+                return `🚨 CRISIS LABORAL - TU PLAN: SUPERVIVENCIA Y ESCAPE
+
+⚠️ ESTO ES UNA EMERGENCIA - ACTÚA HOY
+
+🏥 SALVA TU SALUD (HOY):
+✅ Ve al médico YA - no esperes
+✅ Pide incapacidad médica si es necesario
+✅ Si piensas en hacerte daño: ve a urgencias o llama 192
+
+📝 DOCUMENTA PARA PROTEGERTE:
+✅ TODO por escrito: síntomas, incidentes, impacto
+✅ Copia de tu expediente laboral
+✅ Evidencia de abuso o negligencia
+
+💬 COMUNICACIÓN DE SUPERVIVENCIA:
+✅ Informa a tu familia la gravedad de la situación
+✅ Comunica solo lo mínimo necesario en el trabajo
+✅ Busca apoyo legal: muchos abogados dan consulta gratuita
+
+🛡️ PLAN DE ESCAPE (7 DÍAS):
+• HOY: Médico + avisar familia
+• Día 2-3: Asesoría legal + documentar todo
+• Día 4-5: Solicitar trabajo remoto o incapacidad
+• Día 6-7: Plan de salida con protección legal
+
+📞 NÚMEROS DE EMERGENCIA:
+• Crisis: 192
+• Emergencia: 911
+• Violencia: 155
+
+💪 MANTRAS DE SUPERVIVENCIA:
+• "Esto es temporal"
+• "Merezco respeto"
+• "Soy más fuerte de lo que creo"
+• "Voy a salir de esto"
+
+🎯 ACCIÓN INMEDIATA:
+AHORA MISMO: Llama y agenda cita médica. Texto a 3 personas de confianza: 
+"Necesito ayuda urgente con mi situación laboral."`;
+            }
+        }
+    </script>
+</body>
+</html>
